@@ -22,6 +22,7 @@ public class Main {
         //    String secretWord1 = "shake";
         String correct = secretWord.toUpperCase();
 //        String guessx = "easte";
+        boolean isValidWord = false;
 
 
         //Loop for six guesses
@@ -30,6 +31,27 @@ public class Main {
 
             System.out.println("Please guess the word: ");
             guess = scanner.nextLine().toUpperCase();
+
+            //Test if the word has 5 letters and exists in the dictionary
+            while (isValidWord == false) {
+                guess = guess.toLowerCase();
+                if (!(guess.length() == 5)) {
+
+                    System.out.println("Please enter a 5 letter word");
+                    guess = scanner.nextLine().toUpperCase();
+
+                } else if (!DictionaryWordle.isValid(guess)) {
+                    System.out.println("Please enter a valid word");
+                    guess = scanner.nextLine().toUpperCase();
+                } else {
+                    guess = guess.toUpperCase();
+                    isValidWord = true;
+
+                }
+            }
+
+            isValidWord = false;
+            //Test if the word exists in the dictionary:
 
 
             //Loop to iterate trough each letter
@@ -60,7 +82,7 @@ public class Main {
             }
         }
         if (!guess.equals(correct)) {
-            System.out.println("Correct! You win!");
+            System.out.println("You loose!");
         }
     }
 }
