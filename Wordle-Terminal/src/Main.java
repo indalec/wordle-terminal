@@ -24,7 +24,7 @@ public class Main {
 //        String guessx = "easte";
 
         String correct = secretWord.toUpperCase();
-        boolean isValidWord = false;
+
 
 
         //Loop for six guesses
@@ -35,24 +35,8 @@ public class Main {
             guess = scanner.nextLine().toUpperCase();
 
             //Test if the word has 5 letters and exists in the dictionary
-            while (isValidWord == false) {
-                guess = guess.toLowerCase();
-                if (!(guess.length() == 5)) {
+checkWordValid(guess);
 
-                    System.out.println("Please enter a 5 letter word");
-                    guess = scanner.nextLine().toUpperCase();
-
-                } else if (!DictionaryWordle.isValid(guess)) {
-                    System.out.println("Please enter a valid word");
-                    guess = scanner.nextLine().toUpperCase();
-                } else {
-                    guess = guess.toUpperCase();
-                    isValidWord = true;
-
-                }
-            }
-
-            isValidWord = false;
             //Test if the word exists in the dictionary:
 
 
@@ -63,8 +47,6 @@ public class Main {
                 if (guess.substring(i, i + 1).equals(correct.substring(i, i + 1))) {
 
                     //Letter matches
-
-
                     System.out.print(backgroundGreen + guess.substring(i, i + 1) + resetColor);
 
                 } else if (correct.indexOf(guess.substring(i, i + 1)) > -1) {
@@ -86,5 +68,29 @@ public class Main {
         if (!guess.equals(correct)) {
             System.out.println("You loose!");
         }
+    }
+
+    private static String checkWordValid(String guess) {
+        boolean isValidWord = false;
+        while (isValidWord == false) {
+            guess = guess.toLowerCase();
+            Scanner scanner = new Scanner(System.in);
+            if (!(guess.length() == 5)) {
+
+                System.out.println("Please enter a 5 letter word");
+                guess = scanner.nextLine().toLowerCase();
+
+            } else if (!DictionaryWordle.isValid(guess)) {
+                System.out.println("Please enter a valid word");
+                guess = scanner.nextLine().toLowerCase();
+            } else {
+                guess = guess.toUpperCase();
+                isValidWord = true;
+
+            }
+        }
+
+        isValidWord = false;
+        return guess.toUpperCase();
     }
 }
