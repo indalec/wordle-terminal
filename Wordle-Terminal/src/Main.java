@@ -13,5 +13,8 @@ public class Main {
         int maxTries = 6;
         String secretWord = DictionaryWordle.getRandomWord();
 
+        String correct = "shake"
+        String guess = "paste";
+
     }
 }
