@@ -20,8 +20,10 @@ public class Main {
 
 //FOR DEVELOPEMENT:
         //    String secretWord1 = "shake";
-        String correct = secretWord.toUpperCase();
+
 //        String guessx = "easte";
+
+        String correct = secretWord.toUpperCase();
         boolean isValidWord = false;
 
 
