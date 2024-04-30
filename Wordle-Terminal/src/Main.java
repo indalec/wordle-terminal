@@ -31,24 +31,6 @@ public class Main {
             System.out.println("Please guess the word: ");
             guess = scanner.nextLine().toUpperCase();
 
-            //Test if the word has 5 letters existing
-            while (!(guess.length() == 5 &&  DictionaryWordle.isValid(guess))) {
-                if (!(guess.length() == 5)) {
-
-                    System.out.println("Please enter a 5 letter word");
-                    guess = scanner.nextLine().toUpperCase();
-
-                }
-                else if (!DictionaryWordle.isValid(guess)) {
-                    System.out.println("Please enter a valid word");
-                    guess = scanner.nextLine().toUpperCase();
-                }
-
-
-            }
-
-            //Test if the word exists in the dictionary:
-
 
             //Loop to iterate trough each letter
 
@@ -57,6 +39,7 @@ public class Main {
                 if (guess.substring(i, i + 1).equals(correct.substring(i, i + 1))) {
 
                     //Letter matches
+
 
                     System.out.print(backgroundGreen + guess.substring(i, i + 1) + resetColor);
 
