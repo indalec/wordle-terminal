@@ -1,5 +1,3 @@
-// Scanner, substring, loops ANSI color codes
-
 import java.util.Scanner;
 
 public class Main {
@@ -11,79 +9,68 @@ public class Main {
         System.out.println("Welcome to Wordle!");
 
         int tries = 6;
-        int wordLenght = 5;
+        int wordLength = 5;
 
         String secretWord = DictionaryWordle.getRandomWord();
+        char[] secretWordArray = secretWord.toUpperCase().toCharArray();
 
-        //Colors
+        // Colors
         String backgroundGreen = "\u001b[42m";
         String backgroundYellow = "\u001b[43m";
         String resetColor = "\u001b[0m";
 
-        //FOR DEVELOPEMENT:
-        //    String secretWord1 = "shake";
-        //    String guessx = "easte";
-
-        String correct = secretWord.toUpperCase();
         boolean isValidWord = false;
 
-
-        //Loop for six guesses
+        // Loop for six guesses
         String guess = null;
         for (tries = 6; tries > 0; tries--) {
 
-            System.out.println("You have " + tries + " left.");
+            System.out.println("You have " + tries + " tries left.");
             System.out.println("Please guess the word: ");
             guess = scanner.nextLine().toUpperCase();
 
-            //Test if the word has 5 letters and exists in the dictionary
-            while (isValidWord == false) {
-                guess = guess.toLowerCase();
-                if (!(guess.length() == wordLenght)) {
-
-                    System.out.println("Please enter a " + wordLenght + " letter word");
-                    guess = scanner.nextLine().toUpperCase();
-
-                } else if (!DictionaryWordle.isValid(guess)) {
+            // Test if the word has 5 letters and exists in the dictionary
+            while (!isValidWord) {
+                if (guess.length() != wordLength) {
+                    System.out.println("Please enter a " + wordLength + " letter word");
+                } else if (!DictionaryWordle.isValid(guess.toLowerCase())) {
                     System.out.println("Please enter a valid word");
-                    guess = scanner.nextLine().toUpperCase();
                 } else {
-                    guess = guess.toUpperCase();
                     isValidWord = true;
+                }
 
+                if (!isValidWord) {
+                    guess = scanner.nextLine().toUpperCase();
                 }
             }
 
             isValidWord = false;
+            char[] guessArray = guess.toCharArray();
 
-            //Loop to iterate trough each letter
-
-            for (int i = 0; i < wordLenght; i++) {
-
-                if (guess.substring(i, i + 1).equals(correct.substring(i, i + 1))) {
-
-                    //Letter matches
-
-                    System.out.print(backgroundGreen + guess.substring(i, i + 1) + resetColor);
-
-                } else if (correct.indexOf(guess.substring(i, i + 1)) > -1) {
-
-                    //Letter is in word, but different location
-                    System.out.print(backgroundYellow + guess.substring(i, i + 1) + resetColor);
-
+            // Loop to iterate through each letter
+            for (int i = 0; i < wordLength; i++) {
+                if (guessArray[i] == secretWordArray[i]) {
+                    // Letter matches
+                    System.out.print(resetColor + backgroundGreen + guessArray[i]);
+                } else if (secretWord.indexOf(guessArray[i]) > -1) {
+                    // Letter is in word, but different location
+                    System.out.print(resetColor + backgroundYellow + guessArray[i]);
                 } else {
-                    System.out.print(guess.substring(i, i + 1));
+                    System.out.print(resetColor + guessArray[i]);
                 }
-
             }
             System.out.println();
-            if (guess.equals(correct)) {
+
+            if (guess.equals(secretWord.toUpperCase())) {
                 System.out.println("Correct! You win!");
                 break;
             }
         }
-        if (!guess.equals(correct)) {
-            System.out.println("No more tries. You loose!");
+
+        if (!guess.equals(secretWord.toUpperCase())) {
+            System.out.println("No more tries. You lose!");
         }
+
+        scanner.close();
     }
 }
