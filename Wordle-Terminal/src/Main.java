@@ -26,7 +26,6 @@ public class Main {
         String correct = secretWord.toUpperCase();
 
 
-
         //Loop for six guesses
         String guess = null;
         for (int j = 0; j < 6; j++) {
@@ -35,9 +34,9 @@ public class Main {
             guess = scanner.nextLine().toUpperCase();
 
             //Test if the word has 5 letters and exists in the dictionary
-checkWordValid(guess);
+            checkWordValid(guess);
 
-            //Test if the word exists in the dictionary:
+
 
 
             //Loop to iterate trough each letter
@@ -90,7 +89,6 @@ checkWordValid(guess);
             }
         }
 
-        isValidWord = false;
         return guess.toUpperCase();
     }
 }
