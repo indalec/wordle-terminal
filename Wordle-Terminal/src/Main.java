@@ -14,6 +14,7 @@ public class Main {
         String secretWord = DictionaryWordle.getRandomWord();
         char[] secretWordArray = secretWord.toUpperCase().toCharArray();
 
+
         // Colors
         String backgroundGreen = "\u001b[42m";
         String backgroundYellow = "\u001b[43m";
