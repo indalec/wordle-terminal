@@ -49,14 +49,23 @@ public class Main {
 
             // Loop to iterate through each letter
             for (int i = 0; i < wordLength; i++) {
+                boolean isLetterInWord = false;
+                for (char letter : secretWordArray) {
+                    if (guessArray[i] == letter) {
+                        isLetterInWord = true;
+                        break;
+                    }
+                }
+
                 if (guessArray[i] == secretWordArray[i]) {
                     // Letter matches
-                    System.out.print(resetColor + backgroundGreen + guessArray[i]);
-                } else if (secretWord.indexOf(guessArray[i]) > -1) {
+                    System.out.print(backgroundGreen + guessArray[i] + resetColor);
+                } else if (isLetterInWord) {
                     // Letter is in word, but different location
-                    System.out.print(resetColor + backgroundYellow + guessArray[i]);
+                    System.out.print(backgroundYellow + guessArray[i] + resetColor);
                 } else {
-                    System.out.print(resetColor + guessArray[i]);
+                    // Letter is not in word
+                    System.out.print(guessArray[i]);
                 }
             }
             System.out.println();
