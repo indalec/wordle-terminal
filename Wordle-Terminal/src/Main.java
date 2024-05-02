@@ -9,8 +9,8 @@ public class Main {
         DictionaryWordle dictionaryWordle = new DictionaryWordle();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome to Wordle!");
-        int tries = 0;
-        int maxTries = 6;
+        int tries;
+
         String secretWord = DictionaryWordle.getRandomWord();
 
         //Colors
@@ -18,10 +18,9 @@ public class Main {
         String backgroundYellow = "\u001b[43m";
         String resetColor = "\u001b[0m";
 
-//FOR DEVELOPEMENT:
+        //FOR DEVELOPEMENT:
         //    String secretWord1 = "shake";
-
-//        String guessx = "easte";
+        //    String guessx = "easte";
 
         String correct = secretWord.toUpperCase();
         boolean isValidWord = false;
@@ -29,8 +28,9 @@ public class Main {
 
         //Loop for six guesses
         String guess = null;
-        for (int j = 0; j < 6; j++) {
+        for (tries = 6; tries > 0; tries--) {
 
+            System.out.println("You have " + tries+ " left.");
             System.out.println("Please guess the word: ");
             guess = scanner.nextLine().toUpperCase();
 
