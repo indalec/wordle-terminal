@@ -9,7 +9,9 @@ public class Main {
         DictionaryWordle dictionaryWordle = new DictionaryWordle();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome to Wordle!");
-        int tries;
+
+        int tries = 6;
+        int wordLenght = 5;
 
         String secretWord = DictionaryWordle.getRandomWord();
 
@@ -30,16 +32,16 @@ public class Main {
         String guess = null;
         for (tries = 6; tries > 0; tries--) {
 
-            System.out.println("You have " + tries+ " left.");
+            System.out.println("You have " + tries + " left.");
             System.out.println("Please guess the word: ");
             guess = scanner.nextLine().toUpperCase();
 
             //Test if the word has 5 letters and exists in the dictionary
             while (isValidWord == false) {
                 guess = guess.toLowerCase();
-                if (!(guess.length() == 5)) {
+                if (!(guess.length() == wordLenght)) {
 
-                    System.out.println("Please enter a 5 letter word");
+                    System.out.println("Please enter a " + wordLenght + " letter word");
                     guess = scanner.nextLine().toUpperCase();
 
                 } else if (!DictionaryWordle.isValid(guess)) {
@@ -53,17 +55,14 @@ public class Main {
             }
 
             isValidWord = false;
-            //Test if the word exists in the dictionary:
-
 
             //Loop to iterate trough each letter
 
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < wordLenght; i++) {
 
                 if (guess.substring(i, i + 1).equals(correct.substring(i, i + 1))) {
 
                     //Letter matches
-
 
                     System.out.print(backgroundGreen + guess.substring(i, i + 1) + resetColor);
 
@@ -84,7 +83,7 @@ public class Main {
             }
         }
         if (!guess.equals(correct)) {
-            System.out.println("You loose!");
+            System.out.println("No more tries. You loose!");
         }
     }
 }
