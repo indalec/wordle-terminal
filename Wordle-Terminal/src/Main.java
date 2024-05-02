@@ -1,41 +1,50 @@
 import java.util.Scanner;
 
 public class Main {
-    private static final int MAX_ATTEMPTS = 6;
-    private static final int WORD_LENGTH = 5;
-    private static String[][] grid = new String[MAX_ATTEMPTS][WORD_LENGTH];
+    private static int maxAttempts = 6;
+    private static int wordLength = 5;
+    private static String[][] grid = new String[maxAttempts][wordLength];
 
     public static void main(String[] args) {
-        System.out.println("WORDLE!");
-        initializeGrid();
 
-        DictionaryWordle dictionaryWordle = new DictionaryWordle();
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Welcome to Wordle!");
-
-        String secretWord = DictionaryWordle.getRandomWord();
-        char[] secretWordArray = secretWord.toUpperCase().toCharArray();
 
         // Colors
         String backgroundGreen = "\u001b[42m";
         String backgroundYellow = "\u001b[43m";
         String resetColor = "\u001b[0m";
 
+
+        System.out.println("WORDLE!");
+
+
+
+//        DictionaryWordle dictionaryWordle = new DictionaryWordle();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Welcome to Wordle!");
+
+        String secretWord = DictionaryWordle.getRandomWord();
+
+        char[] secretWordArray = secretWord.toUpperCase().toCharArray();
+
+
+
         boolean isValidWord = false;
 
         // Loop for six guesses
         String guess = null;
-        for (int tries = MAX_ATTEMPTS; tries > 0; tries--) {
+        for (int tries = maxAttempts; tries > 0; tries--) {
 
             System.out.println("You have " + tries + " tries left.");
+
+            initializeGrid();
             printGrid();
             System.out.println("Please guess the word: ");
             guess = scanner.nextLine().toUpperCase();
 
             // Test if the word has 5 letters and exists in the dictionary
             while (!isValidWord) {
-                if (guess.length() != WORD_LENGTH) {
-                    System.out.println("Please enter a " + WORD_LENGTH + " letter word");
+                if (guess.length() != wordLength) {
+                    System.out.println("Please enter a " + wordLength + " letter word");
                 } else if (!DictionaryWordle.isValid(guess.toLowerCase())) {
                     System.out.println("Please enter a valid word");
                 } else {
@@ -47,12 +56,13 @@ public class Main {
                 }
             }
 
+
             isValidWord = false;
-            updateGrid(MAX_ATTEMPTS - tries, guess, secretWordArray, backgroundGreen, backgroundYellow, resetColor);
+            updateGrid(maxAttempts - tries, guess, secretWordArray, backgroundGreen, backgroundYellow, resetColor);
             char[] guessArray = guess.toCharArray();
 
             // Loop to iterate through each letter
-            for (int i = 0; i < WORD_LENGTH; i++) {
+            for (int i = 0; i < wordLength; i++) {
                 boolean isLetterInWord = false;
                 for (char letter : secretWordArray) {
                     if (guessArray[i] == letter) {
@@ -85,25 +95,25 @@ public class Main {
     }
 
     private static void initializeGrid() {
-        for (int i = 0; i < MAX_ATTEMPTS; i++) {
-            for (int j = 0; j < WORD_LENGTH; j++) {
+        for (int i = 0; i < maxAttempts; i++) {
+            for (int j = 0; j < wordLength; j++) {
                 grid[i][j] = ".";
             }
         }
     }
 
     private static void printGrid() {
-        for (int i = 0; i < MAX_ATTEMPTS; i++) {
-            for (int j = 0; j < WORD_LENGTH; j++) {
+        for (int i = 0; i < maxAttempts; i++) {
+            for (int j = 0; j < wordLength; j++) {
                 System.out.print(grid[i][j] + " ");
             }
-            System.out.println(); // Move to the next line after printing each row
+            System.out.println();
         }
     }
 
     private static void updateGrid(int attempt, String guess, char[] secretWordArray, String bgGreen, String bgYellow, String reset) {
         char[] guessArray = guess.toCharArray();
-        for (int i = 0; i < WORD_LENGTH; i++) {
+        for (int i = 0; i < wordLength; i++) {
             boolean isLetterInWord = false;
             for (char letter : secretWordArray) {
                 if (guessArray[i] == letter) {
