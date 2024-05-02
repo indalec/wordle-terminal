@@ -6,24 +6,22 @@ public class Main {
     private static String[][] grid = new String[maxAttempts][wordLength];
 
     public static void main(String[] args) {
-
-
         // Colors
         String backgroundGreen = "\u001b[42m";
         String backgroundYellow = "\u001b[43m";
         String resetColor = "\u001b[0m";
 
 
+
         System.out.println("WORDLE!");
 
+        initializeGrid();
 
-
-//        DictionaryWordle dictionaryWordle = new DictionaryWordle();
+     //   DictionaryWordle dictionaryWordle = new DictionaryWordle();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome to Wordle!");
 
         String secretWord = DictionaryWordle.getRandomWord();
-
         char[] secretWordArray = secretWord.toUpperCase().toCharArray();
 
 
@@ -36,8 +34,8 @@ public class Main {
 
             System.out.println("You have " + tries + " tries left.");
 
-            initializeGrid();
             printGrid();
+
             System.out.println("Please guess the word: ");
             guess = scanner.nextLine().toUpperCase();
 
@@ -55,11 +53,11 @@ public class Main {
                     guess = scanner.nextLine().toUpperCase();
                 }
             }
-
-
-
             isValidWord = false;
+
+
             updateGrid(maxAttempts - tries, guess, secretWordArray, backgroundGreen, backgroundYellow, resetColor);
+
             char[] guessArray = guess.toCharArray();
 
             // Loop to iterate through each letter
@@ -108,7 +106,7 @@ public class Main {
             for (int j = 0; j < wordLength; j++) {
                 System.out.print(grid[i][j] + " ");
             }
-            System.out.println();
+            System.out.println(); // Move to the next line after printing each row
         }
     }
 
