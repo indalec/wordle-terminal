@@ -57,6 +57,7 @@ public class Main {
             }
 
 
+
             isValidWord = false;
             updateGrid(maxAttempts - tries, guess, secretWordArray, backgroundGreen, backgroundYellow, resetColor);
             char[] guessArray = guess.toCharArray();
